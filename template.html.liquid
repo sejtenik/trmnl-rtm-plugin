@@ -4,7 +4,7 @@
              data-list-limit="false"
              data-list-max-height="340"
              data-list-hidden-count="false">
-            {% assign first_list_limit = 8 %}
+            {% assign first_list_limit = 9 %}
             {% assign tasks_to_display = tasks | slice: 0, first_list_limit %}
             {% for task in tasks_to_display  %}
                 <div class="item">
@@ -16,14 +16,15 @@
                         <div class="flex gap--small">
                             {% unless task.due.empty %}
                                 <span class="label label--small label--underline">
-                                 ⏰{{task.due}}
-                                </span>
+                          ⏰{{task.due}}
+
+                        </span>
                             {% endunless %}
                             <span class="label label--small">
-                                {% for tag in task.tags%}
-                                    #{{tag}}
-                                {% endfor %}
-                            </span>
+                        {% for tag in task.tags%}
+                            #{{tag}}
+                        {% endfor %}
+                      </span>
                         </div>
                     </div>
                 </div>
@@ -32,7 +33,7 @@
         <div class="list"> <!-- Truncation List -->
             <div class="list"
                  data-list-limit="true"
-                 data-list-max-height="340"
+                 data-list-max-height="360"
                  data-list-hidden-count="true">
                 {% assign tasks_to_display = tasks | slice: first_list_limit, tasks.size %}
                 {% for task in tasks_to_display %}
@@ -49,10 +50,10 @@
                               </span>
                                 {% endunless %}
                                 <span class="label label--small">
-                                  {% for tag in task.tags%}
-                                      #{{tag}}
-                                  {% endfor %}
-                                </span>
+                              {% for tag in task.tags%}
+                                  #{{tag}}
+                              {% endfor %}
+                            </span>
                             </div>
                         </div>
                     </div>
