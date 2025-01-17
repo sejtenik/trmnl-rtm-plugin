@@ -1,60 +1,70 @@
 <div class="layout">
-  <div class="columns">
-    <div class="list"
-      data-list-limit="false"
-      data-list-max-height="340"
-      data-list-hidden-count="false">
-      {% assign first_list_limit = 8 %}
-      {% assign tasks_to_display = tasks | slice: 0, first_list_limit %}
-      {% for task in tasks_to_display  %}
-      <div class="item">
-        <div class="meta">
-          <span class="index"></span>
+    <div class="columns">
+        <div class="list"
+             data-list-limit="false"
+             data-list-max-height="340"
+             data-list-hidden-count="false">
+            {% assign first_list_limit = 8 %}
+            {% assign tasks_to_display = tasks | slice: 0, first_list_limit %}
+            {% for task in tasks_to_display  %}
+                <div class="item">
+                    <div class="meta">
+                        <span class="index"></span>
+                    </div>
+                    <div class="content">
+                        <span class="title title--small">{{ task.name }}</span>
+                        <div class="flex gap--small">
+                            {% unless task.due.empty %}
+                                <span class="label label--small label--underline">
+                                 ⏰{{task.due}}
+                                </span>
+                            {% endunless %}
+                            <span class="label label--small">
+                                {% for tag in task.tags%}
+                                    #{{tag}}
+                                {% endfor %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-        <div class="content">
-          <span class="title title--small">{{ task.name }}</span>
-          <div class="flex gap--small">
-            {% unless task.due.empty %}
-            <span class="label label--small label--underline">
-              ⏰{{task.due}}
-            </span>
-            {% endunless %}
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="list"> <!-- Truncation List -->
-      <div class="list"
-        data-list-limit="true"
-        data-list-max-height="340"
-        data-list-hidden-count="true">
-        {% assign tasks_to_display = tasks | slice: first_list_limit, tasks.size %}
-        {% for task in tasks_to_display %}
-        <div class="item">
-          <div class="meta">
-            <span class="index"></span>
-          </div>
-          <div class="content">
-            <span class="title title--small">{{ task.name }}</span>
-            <div class="flex gap--small">
-              {% unless task.due =='' %}
-              <span class="label label--small label--underline">
-                ⏰{{task.due}}
-              </span>
-              {% endunless %}
+        <div class="list"> <!-- Truncation List -->
+            <div class="list"
+                 data-list-limit="true"
+                 data-list-max-height="340"
+                 data-list-hidden-count="true">
+                {% assign tasks_to_display = tasks | slice: first_list_limit, tasks.size %}
+                {% for task in tasks_to_display %}
+                    <div class="item">
+                        <div class="meta">
+                            <span class="index"></span>
+                        </div>
+                        <div class="content">
+                            <span class="title title--small">{{ task.name }}</span>
+                            <div class="flex gap--small">
+                                {% unless task.due =='' %}
+                                    <span class="label label--small label--underline">
+                                  ⏰{{task.due}}
+                              </span>
+                                {% endunless %}
+                                <span class="label label--small">
+                                  {% for tag in task.tags%}
+                                      #{{tag}}
+                                  {% endfor %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-          </div>
         </div>
-        {% endfor %}
-      </div>
     </div>
-  </div>
 </div>
 <div class="title_bar">
-  <img class="image" src="https://www.svgrepo.com/show/63415/milk.svg">
+    <img class="image" src="https://www.svgrepo.com/show/63415/milk.svg">
   <span class="title">Remember The Milk (Unofficial)</span>
-  <span class="instance"></span>
+    <span class="instance"></span>
 </div>
 
 <!-- Include the overflow.js script -->

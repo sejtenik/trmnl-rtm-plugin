@@ -40,14 +40,19 @@ def get_rtm_data(list_name)
                               filter: 'status:incomplete',
                               list_id: list_id)
 
-  tasks = tasks_response['rsp']['tasks']['list'][0]['taskseries']
+  formatted = tasks_response['rsp']['tasks']['list'].flat_map { |series|
+    series['taskseries'].map { |task|
+      due_date = task['task'][0]['due']
 
-  formatted = tasks.map { |task|
-    due_date = task['task'][0]['due']
-    {name: task['name'],
-     due: format_date(due_date)}
+      tags = task['tags'].empty? ? [] : task['tags']['tag']
+
+      {name: task['name'],
+       due: format_date(due_date),
+       tags: tags
+      }
+    }
   }.sort_by { |task|
-    task[:due].empty? ? '9999-12-31' : task[:due]
+    [task[:due].empty? ? '9999-12-31' : task[:due], task[:name]]
   }
 
   {list: list_name,
