@@ -5,7 +5,6 @@ require 'milkman'
 require 'active_support/time'
 
 DEFAULT_TIME_ZONE = 'Europe/Warsaw'
-your_rtm_list_name = 'Important example tasks'
 
 ###### methods #############
 def format_date(due_date)
@@ -93,6 +92,6 @@ end
 
 ############# execution #########
 
-task_data = get_rtm_data(your_rtm_list_name)
+task_data = get_rtm_data(ENV['RTM_LIST'])
 puts task_data
 send_to_trmnl(task_data)

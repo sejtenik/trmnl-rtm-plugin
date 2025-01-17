@@ -25,6 +25,7 @@ TRMNL_API_KEY=<your api key>
 TRMNL_PLUGIN_ID=<your plugin UUID>
 RTM_API_KEY=<your rtm api key>
 RTM_SHARED_SECRET=<your rtm api key>
+RTM_LIST=<name of a list to fetch>
 ```
 
 To obtain your RTM API key and shared secret go to https://www.rememberthemilk.com/services/api/requestkey.rtm
