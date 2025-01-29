@@ -85,3 +85,7 @@ Please note that "Remember The Milk" and related trademarks are the property of 
 - https://www.rememberthemilk.com/services/api/
 - https://github.com/kevintuhumury/milkman
 - https://github.com/Nynir/trmnl-todoist
+- https://github.com/eindpunt/awesome-TRMNL
+
+### Check out my other private TRMNL plugins.
+- https://github.com/sejtenik?tab=repositories&q=trmnl-
