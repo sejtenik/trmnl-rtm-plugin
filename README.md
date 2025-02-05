@@ -1,15 +1,12 @@
-# TRMNL Remember The Milk Plugin
+# TRMNL Task Integration Plugin
 
-Unofficial Remember The Milk (RTM) plugin for TRMNL.
+An unofficial plugin to integrate tasks from a specific list in Remember The Milk into TRMNL.
 
 <img src="assets/rtm-plugin-trmnl.bmp" alt="screenshot" width="50%"/>
 
 ## Details
-Remember The Milk is a smart to-do app designed to help busy people manage tasks efficiently. 
-It offers features like reminders, tagging, and integration with various platforms, 
-ensuring users can organize their personal and work tasks seamlessly across all devices. 
-It offers an API that allows access to tasks and lists of tasks. 
-This plugin fetches tasks from one particular list and sends it to TRMNL, displaying it on an e-ink screen.
+This plugin fetches tasks from a specified list in Remember The Milk and sends them to TRMNL, 
+displaying them on an e-ink screen.
 
 ## Requirements
 This code interacts with both the RTM REST API using 'milkman' gem and the TRMNL webhook API. 
@@ -67,12 +64,14 @@ To keep the data updated, you can schedule the script to run at regular interval
 
 ## Disclaimer
 
-This plugin is an unofficial non-commercial project and is not affiliated with, endorsed by, or supported by Remember The Milk.
+This plugin is an unofficial non-commercial project and is not endorsed or certified by Remember The Milk.
 
-This work has been heavily inspired by plugin written for TODOIST app by Nynir, available at https://github.com/Nynir/trmnl-todoist.
+This work has been heavily inspired by a plugin written for the TODOIST app by Nynir, 
+available at https://github.com/Nynir/trmnl-todoist.
 
-Please note that "Remember The Milk" and related trademarks are the property of their respective owners. Using this plugin does not grant any rights to these trademarks, nor does it imply any association with or endorsement by the trademark owners.
-
+Please note that "Remember The Milk" and related trademarks are the property
+of their respective owners. Using this plugin does not grant any rights to these trademarks, 
+nor does it imply any association with or endorsement by the trademark owners.
 
 
 ### Links
