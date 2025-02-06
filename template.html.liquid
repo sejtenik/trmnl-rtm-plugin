@@ -21,9 +21,10 @@
                         </span>
                             {% endunless %}
                             <span class="label label--small">
-                        {% for tag in task.tags%}
-                            #{{tag}}
-                        {% endfor %}
+                                {{task.list}}
+                                {% for tag in task.tags%}
+                                    #{{tag}}
+                                {% endfor %}
                       </span>
                         </div>
                     </div>
@@ -50,9 +51,10 @@
                               </span>
                                 {% endunless %}
                                 <span class="label label--small">
-                              {% for tag in task.tags%}
-                                  #{{tag}}
-                              {% endfor %}
+                                    {{task.list}}
+                                    {% for tag in task.tags%}
+                                        #{{tag}}
+                                    {% endfor %}
                             </span>
                             </div>
                         </div>
@@ -64,7 +66,7 @@
 </div>
 <div class="title_bar">
     <img class="image" src="https://www.svgrepo.com/show/63415/milk.svg">
-  <span class="title">Task Integration</span>
+    <span class="title">Task Integration</span>
     <span class="instance"></span>
 </div>
 

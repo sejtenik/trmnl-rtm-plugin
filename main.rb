@@ -29,25 +29,23 @@ def get_rtm_data(list_name)
 
   lists = lists_response['rsp']['lists']['list']
 
-  list_id = lists.find { |list|
-    list['name'] == list_name && list['locked'] != "1"
-  }['id']
-
-  puts "List id: #{list_id}"
+  list_names = lists.to_h { |list| [list['id'], list['name']] }
 
   tasks_response = client.get("rtm.tasks.getList",
-                              filter: 'status:incomplete',
-                              list_id: list_id)
+                              filter: "status:incomplete AND list:#{list_name}")
 
-  formatted = tasks_response['rsp']['tasks']['list'].flat_map { |series|
-    series['taskseries'].map { |task|
+  formatted = tasks_response['rsp']['tasks']['list'].flat_map { |list|
+    list_id = list['id']
+    list_name = list_names[list_id]
+    list['taskseries'].map { |task|
       due_date = task['task'][0]['due']
 
       tags = task['tags'].empty? ? [] : task['tags']['tag']
 
       {name: task['name'],
        due: format_date(due_date),
-       tags: tags
+       tags: tags,
+       list: list_name
       }
     }
   }.sort_by { |task|
