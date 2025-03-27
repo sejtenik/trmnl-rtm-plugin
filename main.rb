@@ -5,6 +5,8 @@ require 'milkman'
 require 'active_support/time'
 
 DEFAULT_TIME_ZONE = 'Europe/Warsaw'
+TRMNL_PAYLOAD_LIMIT = 2048
+MAX_TASKS_TO_DISPLAY = 17
 
 ###### methods #############
 def format_date(due_date)
@@ -34,7 +36,7 @@ def get_rtm_data(list_name)
   tasks_response = client.get("rtm.tasks.getList",
                               filter: "status:incomplete AND list:#{list_name}")
 
-  formatted = tasks_response['rsp']['tasks']['list'].flat_map { |list|
+  tasks_formatted = tasks_response['rsp']['tasks']['list'].flat_map { |list|
     list_id = list['id']
     list_name = list_names[list_id]
     list['taskseries'].map { |task|
@@ -52,8 +54,11 @@ def get_rtm_data(list_name)
     [task[:due].empty? ? '9999-12-31' : task[:due], task[:name]]
   }
 
+  limited_array = tasks_formatted.take(MAX_TASKS_TO_DISPLAY)
+
   {list: list_name,
-   tasks: formatted}
+   tasks: limited_array,
+   surplus_tasks: tasks_formatted.size - limited_array.size}
 rescue StandardError => e
   puts "Error: #{e.message}"
   raise
@@ -73,8 +78,17 @@ def send_to_trmnl(data_payload)
   }
 
   request = Net::HTTP::Post.new(uri.path, headers)
-  request.body = {merge_variables: data_payload}.to_json
+  body = { merge_variables: data_payload }.to_json
 
+  puts body
+
+  if body.bytesize > TRMNL_PAYLOAD_LIMIT
+    raise "Request body is too large (#{body.bytesize} bytes, limit: #{TRMNL_PAYLOAD_LIMIT} bytes)"
+  else
+    puts "Request body size: (#{body.bytesize} bytes)"
+  end
+
+  request.body = body
   response = http.request(request)
 
   if response.is_a?(Net::HTTPSuccess)

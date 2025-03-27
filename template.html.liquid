@@ -6,7 +6,7 @@
              data-list-hidden-count="false">
             {% assign first_list_limit = 9 %}
             {% assign tasks_to_display = tasks | slice: 0, first_list_limit %}
-            {% for task in tasks_to_display  %}
+            {% for task in tasks_to_display %}
                 <div class="item">
                     <div class="meta">
                         <span class="index"></span>
@@ -16,14 +16,14 @@
                         <div class="flex gap--small">
                             {% unless task.due.empty %}
                                 <span class="label label--small label--underline">
-                          ⏰{{task.due}}
+                          ⏰{{ task.due }}
 
                         </span>
                             {% endunless %}
                             <span class="label label--small">
-                                {{task.list}}
-                                {% for tag in task.tags%}
-                                    #{{tag}}
+                        {{ task.list }}
+                                {% for tag in task.tags %}
+                                    #{{ tag }}
                                 {% endfor %}
                       </span>
                         </div>
@@ -35,7 +35,7 @@
             <div class="list"
                  data-list-limit="true"
                  data-list-max-height="360"
-                 data-list-hidden-count="true">
+                 data-list-hidden-count="false">
                 {% assign tasks_to_display = tasks | slice: first_list_limit, tasks.size %}
                 {% for task in tasks_to_display %}
                     <div class="item">
@@ -45,21 +45,30 @@
                         <div class="content">
                             <span class="title title--small">{{ task.name }}</span>
                             <div class="flex gap--small">
-                                {% unless task.due =='' %}
+                                {% unless task.due == '' %}
                                     <span class="label label--small label--underline">
-                                  ⏰{{task.due}}
+                                  ⏰{{ task.due }}
                               </span>
                                 {% endunless %}
                                 <span class="label label--small">
-                                    {{task.list}}
-                                    {% for tag in task.tags%}
-                                        #{{tag}}
+                              {{ task.list }}
+                                    {% for tag in task.tags %}
+                                        #{{ tag }}
                                     {% endfor %}
                             </span>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
+
+                    <div class="item">
+                        <div class="meta">
+                            <span class="index"></span>
+                        </div>
+                        <div class="content">
+                            <span class="text--gray-4">And {{ surplus_tasks }} more </span>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
