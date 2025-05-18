@@ -61,14 +61,12 @@
                     </div>
                 {% endfor %}
 
-                    <div class="item">
-                        <div class="meta">
-                            <span class="index"></span>
-                        </div>
-                        <div class="content">
-                            <span class="text--gray-4">And {{ surplus_tasks }} more </span>
-                        </div>
+
+                {%if surplus_tasks > 0 %}
+                    <div class="content" style="margin-left:20px; margin-top:10px">
+                        <span class="text--gray-4">And {{ surplus_tasks }} more </span>
                     </div>
+                {% endif %}
             </div>
         </div>
     </div>
